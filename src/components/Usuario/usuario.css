@@ -1,0 +1,26 @@
+.usuario {
+    width: 100%;
+    padding: 2rem;
+}
+
+.usuario__container {
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+}
+
+.usuario__container img {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+}
+
+.usuario__form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.usuario__form input{
+    padding: 6px 10px;
+}

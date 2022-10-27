@@ -1,0 +1,49 @@
+.productos {
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+}
+
+.productos > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productos__container {
+    margin: 0 auto 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 440px;
+    cursor: pointer;
+}
+
+.productos__container, .productos__container img {
+    max-width: 280px;
+}
+
+.productos__container img {
+    vertical-align: bottom;
+}
+
+.productos__body {
+    padding: 8px 12px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 230px;
+}
+
+.productos__body h4 {
+    font-size: 16px;
+}
+
+.productos__footer span {
+    float: right;
+    font-weight: 600;
+}
+
+.productos__info {
+    flex: 1;
+}
