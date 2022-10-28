@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import "./producto.css";
+import { ProductoTag } from "./ProductoTag";
 
 export const Producto = (props) => {
   const { user, producto } = props;
@@ -17,15 +18,11 @@ export const Producto = (props) => {
           <p className="description">{producto.description}</p>
           <div className="info">
             <span className="price">${producto.price}</span>
-            <button disabled>Comprar Pronto</button>
+            <button disabled>No disponible</button>
           </div>
           <div className="tags__container">
             {producto.tags.map((tag, index) => {
-              return (
-                <span className="tags" key={tag + index}>
-                  {tag}{" "}
-                </span>
-              );
+              return <ProductoTag key={tag + index} tag={tag} />;
             })}
           </div>
         </div>

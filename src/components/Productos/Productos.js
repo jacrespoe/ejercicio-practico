@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch/useFetch";
+import { ProductoCard } from "./ProductoCard";
+import { Filtro } from "./Filtro";
 import "./productos.css";
 
 export const Productos = (props) => {
   const { setProducto } = props;
-  const {
-    data: productos,
-    error,
-    loading,
-  } = useFetch("https://fakerapi.it/api/v1/products");
+  const [query, setQuery] = useState("");
+  const { data: productos, loading } = useFetch(
+    "https://fakerapi.it/api/v1/products"
+  );
   const navigate = useNavigate();
 
   const handleProducto = (producto) => {
@@ -17,29 +18,24 @@ export const Productos = (props) => {
     navigate("/producto");
   };
 
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
   if (loading) return <h1>Cargando...</h1>;
 
   return (
     <div className="productos">
+      <Filtro handleChange={handleChange} query={query} />
       <div>
         {productos.map((producto) => {
           return (
-            <div
-              onClick={() => handleProducto(producto)}
-              key={producto.id}
-              className="productos__container"
-            >
-              <img src={producto.image} alt="producto-img" />
-              <div className="productos__body">
-                <div className="productos__info">
-                  <h4>{producto.name}</h4>
-                  <p>{producto.description}</p>
-                </div>
-                <div className="productos__footer">
-                  <span>${producto.price}</span>
-                </div>
-              </div>
-            </div>
+            producto.name.toLowerCase().includes(query.toLowerCase()) && (
+              <ProductoCard
+                handleProducto={handleProducto}
+                producto={producto}
+              />
+            )
           );
         })}
       </div>

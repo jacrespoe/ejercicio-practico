@@ -5,7 +5,6 @@ import { Home } from "../components/Home/Home";
 import { Usuario } from "../components/Usuario/Usuario";
 import { Producto } from "../components/Producto/Producto";
 import { Productos } from "../components/Productos/Productos";
-import { useFetch } from "../hooks/useFetch/useFetch";
 
 export const AppRouter = () => {
   const [user, setUser] = useState(null);
