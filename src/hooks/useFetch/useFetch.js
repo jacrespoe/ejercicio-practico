@@ -9,8 +9,9 @@ export const useFetch = (url) => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === "OK") {
-          setData(data.data);
+        console.log(data);
+        if (data) {
+          setData(data)
         } else {
           setError({
             msg: "Ha ocurrido un error, porfavor intente nuevamente.",
@@ -25,5 +26,5 @@ export const useFetch = (url) => {
     fetchData();
   }, []);
 
-  return { data, loading, error };
+  return { data, loading, error, setData };
 };

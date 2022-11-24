@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch/useFetch";
 import { ProductoCard } from "./ProductoCard";
@@ -6,11 +6,12 @@ import { Filtro } from "./Filtro";
 import "./productos.css";
 
 export const Productos = (props) => {
-  const { setProducto } = props;
+  // const { data: productos, loading, setData } = useFetch(
+  //   "http://localhost:8080/producto"
+  // );
+  const { setProducto, setEditarProducto } = props;
   const [query, setQuery] = useState("");
-  const { data: productos, loading } = useFetch(
-    "https://fakerapi.it/api/v1/products"
-  );
+  const [productos, setProductos] = useState(null);
   const navigate = useNavigate();
 
   const handleProducto = (producto) => {
@@ -22,7 +23,26 @@ export const Productos = (props) => {
     setQuery(e.target.value);
   };
 
-  if (loading) return <h1>Cargando...</h1>;
+  const updateProductos = (id) => {
+    const newProductos = productos.filter(producto => {
+      return producto.id !== id;
+    });
+    setProductos(newProductos);
+  }
+
+  useEffect(() => {
+    setEditarProducto(null);
+    fetch("http://localhost:8080/api/productos")
+    .then(res => res.json())
+    .then(({data, status}) => {
+      if(status === "OK"){
+        setProductos(data);
+      }
+    })
+    .catch(err => console.log(err));
+  }, []);
+
+  if (!productos) return <h1>Cargando...</h1>;
 
   return (
     <div className="productos">
@@ -32,8 +52,11 @@ export const Productos = (props) => {
           return (
             producto.name.toLowerCase().includes(query.toLowerCase()) && (
               <ProductoCard
+                key={producto.id}
+                updateProductos={updateProductos}
                 handleProducto={handleProducto}
                 producto={producto}
+                setEditarProducto={setEditarProducto}
               />
             )
           );

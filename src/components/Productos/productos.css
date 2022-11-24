@@ -16,7 +16,6 @@
   border-radius: 4px;
   overflow: hidden;
   height: 440px;
-  cursor: pointer;
 }
 
 .productos__container,
@@ -26,6 +25,8 @@
 
 .productos__container img {
   vertical-align: bottom;
+  max-height: 210px;
+  cursor: pointer;
 }
 
 .productos__body {

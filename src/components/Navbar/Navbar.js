@@ -11,6 +11,11 @@ export const Navbar = (props) => {
         </Link>
       </div>
       <div className="home__navbar-btns">
+        <Link to="agregar">
+          <button>Agregar Producto</button>
+        </Link>
+      </div>
+      <div className="home__navbar-btns">
         <Link to="/usuario">
           <div className="home__navbar-user">
             <img src={user.image} alt="user-img" />

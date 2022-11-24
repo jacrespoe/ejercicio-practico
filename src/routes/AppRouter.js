@@ -5,11 +5,13 @@ import { Home } from "../components/Home/Home";
 import { Usuario } from "../components/Usuario/Usuario";
 import { Producto } from "../components/Producto/Producto";
 import { Productos } from "../components/Productos/Productos";
+import { AgregarProducto } from "../components/AgregarProducto/AgregarProducto";
 
 export const AppRouter = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [producto, setProducto] = useState(null);
+  const [editarProducto, setEditarProducto] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -39,12 +41,13 @@ export const AppRouter = () => {
           path="/"
           element={<Home user={user} handleLogout={handleLogout} />}
         >
-          <Route index element={<Productos setProducto={setProducto} />} />
+          <Route index element={<Productos setEditarProducto={setEditarProducto} setProducto={setProducto} />} />
           <Route
             path="producto"
             element={<Producto user={user} producto={producto} />}
           />
           <Route path="usuario" element={<Usuario user={user} />} />
+          <Route path="agregar" element={<AgregarProducto editarProducto={editarProducto} />} />
         </Route>
         <Route
           path="/auth"
