@@ -2,6 +2,7 @@ import React from "react";
 
 export const Filtro = (props) => {
   const { handleChange, query } = props;
+
   return (
     <input
       onChange={handleChange}

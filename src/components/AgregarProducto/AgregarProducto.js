@@ -52,7 +52,7 @@ export const AgregarProducto = (props) => {
 
     return (
         <>
-            <form className='agregar_form' onSubmit={producto ? handleSubmit : handleUpdate}>
+            <form className='agregar_form' onSubmit={producto ? handleUpdate : handleSubmit}>
                 <input onChange={handleChange} disabled={producto?.id && true} value={newProduct?.id} type="number" name="id" placeholder='ID' />
                 <input onChange={handleChange} value={newProduct?.name} type="text" name="name" placeholder='Name' />
                 <input onChange={handleChange} value={newProduct?.description} type="text" name="description" placeholder='Description' />

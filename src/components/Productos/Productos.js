@@ -30,6 +30,12 @@ export const Productos = (props) => {
     setProductos(newProductos);
   }
 
+  const handleSearch = async () => {
+    const resp = await fetch(`http://localhost:8080/api/productos/buscar?q=${query}`)
+    const data = await resp.json();
+    setProductos(data.data);
+  }
+
   useEffect(() => {
     setEditarProducto(null);
     fetch("http://localhost:8080/api/productos")
@@ -42,6 +48,10 @@ export const Productos = (props) => {
     .catch(err => console.log(err));
   }, []);
 
+  useEffect(() => {
+    handleSearch();
+  }, [query])
+
   if (!productos) return <h1>Cargando...</h1>;
 
   return (
@@ -50,7 +60,7 @@ export const Productos = (props) => {
       <div>
         {productos.map((producto) => {
           return (
-            producto.name.toLowerCase().includes(query.toLowerCase()) && (
+            // producto.name.toLowerCase().includes(query.toLowerCase()) && (
               <ProductoCard
                 key={producto.id}
                 updateProductos={updateProductos}
@@ -58,7 +68,7 @@ export const Productos = (props) => {
                 producto={producto}
                 setEditarProducto={setEditarProducto}
               />
-            )
+            // )
           );
         })}
       </div>
